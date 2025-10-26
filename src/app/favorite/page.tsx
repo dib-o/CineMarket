@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import clsx from "clsx";
 import { useEffect, useState } from "react";
@@ -156,7 +156,11 @@ export default function Favorite({
     allWestern,
   ];
   const [typeNum, setTypeNum] = useState(0);
-  const resultPage = document.getElementById("results");
+  const [resultPage, setResultPage] = useState<HTMLElement | null>(null);
+  useEffect(() => {
+    const r = document.getElementById("results");
+    if (r) setResultPage(r);
+  }, []);
   return (
     <div
       className={clsx(

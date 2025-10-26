@@ -151,30 +151,6 @@ export default function View({
     }
   }, [message]);
 
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  useEffect(() => {
-    const checkFullscreen = () => {
-      // Detects both programmatic and F11 fullscreen
-      const fullscreen =
-        !!document.fullscreenElement ||
-        Math.abs(window.innerHeight - screen.height) < 5;
-
-      setIsFullscreen(fullscreen);
-    };
-
-    // Listen for both resize and fullscreen events
-    window.addEventListener("resize", checkFullscreen);
-    document.addEventListener("fullscreenchange", checkFullscreen);
-
-    // Initial check
-    checkFullscreen();
-
-    return () => {
-      window.removeEventListener("resize", checkFullscreen);
-      document.removeEventListener("fullscreenchange", checkFullscreen);
-    };
-  }, []);
-
   return (
     <div
       className={clsx(
