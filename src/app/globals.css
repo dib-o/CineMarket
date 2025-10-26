@@ -1,26 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+* {
+  @apply box-border
+  outline-none
+  scroll-smooth;
+  font-family: "Nunito Sans", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  @apply text-[62.5%]
+  overflow-x-hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-size: 2rem;
+}
+
+@layer components {
+  a.header {
+    @apply flex justify-center items-center
+    w-auto h-auto p-3
+    rounded-[.5rem]
+    text-white
+    cursor-pointer
+    transition-all duration-300 ease-in-out
+    hover:bg-slate-200
+    hover:text-red-500;
+  }
+
+  div.home {
+    @apply flex flex-col justify-center items-center
+    w-[20rem] h-auto p-5
+    text-white text-[1.5rem]
+    rounded-[1rem]
+    bg-black/50
+    border-red-500 border-[.2rem] border-solid
+    shadow-[0_0_5px_rgba(0,0,0.2)];
+  }
+
+  button.home {
+    @apply w-auto min-w-[10rem] h-auto p-5
+    text-white text-[2rem]
+    uppercase
+    backdrop-blur-[1rem]
+    rounded-[1rem]
+    cursor-pointer
+    shadow-[0_0_5px_rgba(0,0,0.2)]
+    border-black border-[.1rem] border-solid;
+  }
+
+  div.genres {
+    @apply flex flex-row justify-center items-center
+    w-auto h-auto p-3 min-w-[11.5rem]
+    gap-1
+    rounded-[2rem]
+    cursor-pointer
+    border-white border-[.1rem] border-solid
+    shadow-[inset_0_0_5px_white]
+    transition-all duration-300 ease-in-out
+    hover:text-red-500 hover:border-red-500;
+  }
+
+  i.arrows,
+  button.arrows {
+    @apply cursor-pointer
+    transition-all duration-300 ease-in-out
+    hover:scale-[1.25]
+    hover:text-red-500
+    text-shadow-[0_0_5px_rgba(0,0,0.2)];
+  }
+
+  h1.homeTitle {
+    @apply flex flex-row justify-center items-center gap-3
+    text-[3rem] uppercase font-bold
+    w-full text-center
+    bg-gradient-to-t from-black via-red-500 to-black
+    bg-clip-text text-transparent select-none
+    text-shadow-[0_0_10px_rgba(0,0,0,0.2)]
+    max-[560px]:text-[2.5rem];
+  }
+
+  button.view {
+    @apply flex flex-row justify-center items-center
+    w-[10rem] h-auto p-3
+    cursor-pointer
+    rounded-[1rem]
+    border-red-500 border-[.2rem] border-solid
+    text-[1.5rem]
+    uppercase
+    gap-3
+    transition-all duration-300 ease-in-out;
+  }
+
+  button.browse {
+    @apply flex flex-row justify-center items-center
+    text-[2.5rem] text-center
+    w-auto min-w-[10rem] h-auto px-10 py-3
+    rounded-[2rem]
+    uppercase
+    cursor-pointer
+    gap-5
+    text-shadow-[2px_2px_5px_black]
+    transition-all duration-300 ease-in-out;
+  }
+
+  div.favorite {
+    @apply flex flex-row justify-between items-center
+    w-[20rem] h-auto px-10 py-5
+    rounded-[2rem]
+    border-white border-[.2rem] border-solid
+    text-center
+    cursor-pointer
+    transition-all duration-300 ease-in-out
+    hover:shadow-[inset_0_0_10px_#fb2c36] hover:text-red-500;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (max-width: 1500px) {
+  html {
+    font-size: 60%;
+  }
+}
+
+@media (max-width: 1400px) {
+  html {
+    font-size: 55%;
+  }
 }
