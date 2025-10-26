@@ -125,6 +125,7 @@ export default function Cover() {
   return (
     <div
       className={clsx(
+        "relative",
         "flex flex-col justify-start items-center",
         "w-full h-auto min-h-screen",
         "bg-top bg-cover bg-no-repeat"

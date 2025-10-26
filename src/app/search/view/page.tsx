@@ -232,7 +232,8 @@ export default function View({
             "rounded-br-[2rem] rounded-tr-[2rem]",
             "text-[3rem]",
             "bg-black/70",
-            "shadow-[inset_0_0_5px_red]"
+            "shadow-[inset_0_0_5px_red]",
+            "max-[750px]:w-[70%]"
           )}
         >
           <div
@@ -310,7 +311,7 @@ export default function View({
             </p>
             <div
               className={clsx(
-                "flex flex-row justify-start items-center",
+                "flex flex-row flex-wrap justify-start items-center",
                 "w-full h-auto",
                 "gap-5"
               )}

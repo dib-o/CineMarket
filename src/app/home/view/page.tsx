@@ -206,8 +206,7 @@ export default function View({
               : bgDrop.src
           })`,
         }}
-      >
-      </div>
+      ></div>
       <div
         className={clsx(
           "relative",
@@ -225,7 +224,8 @@ export default function View({
             "rounded-br-[2rem] rounded-tr-[2rem]",
             "text-[3rem]",
             "bg-black/70",
-            "shadow-[inset_0_0_5px_red]"
+            "shadow-[inset_0_0_5px_red]",
+            "max-[750px]:w-[70%]"
           )}
         >
           <div
@@ -303,51 +303,53 @@ export default function View({
             </p>
             <div
               className={clsx(
-                "flex flex-row justify-start items-center",
+                "flex flex-row flex-wrap justify-start items-center",
                 "w-full h-auto",
                 "gap-5"
               )}
             >
+              <button
+                className={clsx(
+                  "view",
+                  playHovered && "shadow-[0_0_5px_red] text-red-500"
+                )}
+                onMouseEnter={() => setPlayHovered(true)}
+                onMouseLeave={() => setPlayHovered(false)}
+                onClick={() => setPlay(true)}
+              >
+                <i
+                  className={clsx(
+                    "bx bx-play",
+                    "transition-all duration-300 ease-in-out"
+                  )}
+                ></i>
+                <p>Play</p>
+              </button>
+
               {username !== "" && (
                 <button
                   className={clsx(
                     "view",
-                    playHovered && "shadow-[0_0_5px_red] text-red-500"
+                    addHovered && "shadow-[0_0_5px_red] text-red-500",
+                    loading && "pointer-events-none"
                   )}
-                  onMouseEnter={() => setPlayHovered(true)}
-                  onMouseLeave={() => setPlayHovered(false)}
-                  onClick={() => setPlay(true)}
+                  onMouseEnter={() => setAddHovered(true)}
+                  onMouseLeave={() => setAddHovered(false)}
+                  onClick={() => getsavedMovies()}
+                  disabled={loading}
                 >
                   <i
                     className={clsx(
-                      "bx bx-play",
+                      "bx bxs-folder-minus",
                       "transition-all duration-300 ease-in-out"
                     )}
                   ></i>
-                  <p>Play</p>
+                  <p>
+                    {savedMovies.find((m: any) => m.id === id) ? "Drop" : "Add"}
+                  </p>
                 </button>
               )}
-              <button
-                className={clsx(
-                  "view",
-                  addHovered && "shadow-[0_0_5px_red] text-red-500",
-                  loading && "pointer-events-none"
-                )}
-                onMouseEnter={() => setAddHovered(true)}
-                onMouseLeave={() => setAddHovered(false)}
-                onClick={() => getsavedMovies()}
-                disabled={loading}
-              >
-                <i
-                  className={clsx(
-                    "bx bxs-folder-minus",
-                    "transition-all duration-300 ease-in-out"
-                  )}
-                ></i>
-                <p>
-                  {savedMovies.find((m: any) => m.id === id) ? "Drop" : "Add"}
-                </p>
-              </button>
+
               <button
                 className={clsx(
                   "view",

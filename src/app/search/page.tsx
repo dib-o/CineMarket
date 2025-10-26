@@ -109,6 +109,7 @@ export default function Search({
             className={clsx(
               "flex flex-col justify-center items-center",
               "w-full h-auto",
+              "px-[8.5%]",
               "gap-10",
               "z-1"
             )}
@@ -116,12 +117,14 @@ export default function Search({
             <div
               className={clsx(
                 "flex flex-col justify-center items-center",
-                "w-full h-auto"
+                "w-full h-auto",
+                "gap-10"
               )}
             >
               <h1
                 className={clsx(
-                  "text-red-500 text-[5rem] text-shadow-[2px_2px_5px_rgba(0,0,0.2)]"
+                  "text-red-500 text-[5rem] text-center",
+                  "text-shadow-[2px_2px_5px_rgba(0,0,0.2)]"
                 )}
                 style={{ WebkitTextStroke: "1px white" }}
               >
@@ -129,7 +132,8 @@ export default function Search({
               </h1>
               <p
                 className={clsx(
-                  "text-white text-[1.7rem] text-shadow-[2px_2px_5px_rgba(0,0,0.2)]"
+                  "text-white text-[1.7rem] text-center",
+                  "text-shadow-[2px_2px_5px_rgba(0,0,0.2)]"
                 )}
               >
                 Search and stream thousands of movies, TV shows, and anime
@@ -267,7 +271,7 @@ export default function Search({
             className={clsx(
               "flex flex-col justify-start items-center",
               "w-full h-auto min-h-screen",
-              "p-50",
+              "px-[8.5%] pb-[5rem]",
               "gap-[10rem]"
             )}
           >
@@ -425,7 +429,8 @@ export default function Search({
                   className={clsx(
                     "bx bx-chevron-right",
                     "arrows",
-                    (pageNum > results.length / 50 || pageNum === pageValues.length-1) &&
+                    (pageNum > results.length / 50 ||
+                      pageNum === pageValues.length - 1) &&
                       "pointer-events-none text-slate-500"
                   )}
                   onClick={() => setPageNum(pageNum + 1)}
