@@ -206,7 +206,8 @@ export default function View({
             "rounded-br-[2rem] rounded-tr-[2rem]",
             "text-[3rem]",
             "bg-black/70",
-            "shadow-[inset_0_0_5px_red]"
+            "shadow-[inset_0_0_5px_red]",
+            "max-[750px]:w-[80%]"
           )}
         >
           <div

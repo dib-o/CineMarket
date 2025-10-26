@@ -233,7 +233,7 @@ export default function View({
             "text-[3rem]",
             "bg-black/70",
             "shadow-[inset_0_0_5px_red]",
-            "max-[750px]:w-[70%]"
+            "max-[750px]:w-[80%]"
           )}
         >
           <div
