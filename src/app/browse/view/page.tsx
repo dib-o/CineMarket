@@ -87,7 +87,7 @@ export default function View({
             poster: poster,
             backdrop: backdrop,
             date: date,
-            genreIds: genres
+            genreIds: genres,
           }),
         });
         const data = await res.json();
@@ -118,21 +118,8 @@ export default function View({
           `${BASE_URL}/${type}/${id}?api_key=${API_KEY}&language=en-US`
         );
         const data = await res.json();
-        if (data.genres) {
-          setGenres(data.genres);
-        } else {
-          let resType;
-          if (type === "tv") {
-            resType = "movie";
-          } else {
-            resType = "tv";
-          }
-          const res = await fetch(
-            `${BASE_URL}/${resType}/${id}?api_key=${API_KEY}&language=en-US`
-          );
-          const data = await res.json();
-          setGenres(data.genres);
-        }
+        console.log(data);
+        setGenres(data.genres);
         console.log(data.genres);
       } catch (err) {
         console.error("Failed to fetch genres:", err);
@@ -190,6 +177,7 @@ export default function View({
       document.removeEventListener("fullscreenchange", checkFullscreen);
     };
   }, []);
+
   return (
     <div
       className={clsx(
@@ -205,7 +193,8 @@ export default function View({
       <div
         className={clsx(
           "absolute",
-          "w-full h-screen",
+          "h-screen",
+          "w-full",
           "overflow-hidden",
           "bg-center bg-cover bg-no-repeat",
           "opacity-80"
@@ -217,17 +206,7 @@ export default function View({
               : bgDrop.src
           })`,
         }}
-      >
-        {/* <img
-          className={clsx("w-full h-full", "object-center", "opacity-70")}
-          src={
-            backdrop
-              ? `https://image.tmdb.org/t/p/original/${backdrop}`
-              : bgDrop.src
-          }
-          alt="backdrop img"
-        /> */}
-      </div>
+      ></div>
       <div
         className={clsx(
           "relative",
@@ -346,27 +325,31 @@ export default function View({
                 ></i>
                 <p>Play</p>
               </button>
-              {username !== "" && <button
-                className={clsx(
-                  "view",
-                  addHovered && "shadow-[0_0_5px_red] text-red-500",
-                  loading && "pointer-events-none"
-                )}
-                onMouseEnter={() => setAddHovered(true)}
-                onMouseLeave={() => setAddHovered(false)}
-                onClick={() => getsavedMovies()}
-                disabled={loading}
-              >
-                <i
+
+              {username !== "" && (
+                <button
                   className={clsx(
-                    "bx bxs-folder-minus",
-                    "transition-all duration-300 ease-in-out"
+                    "view",
+                    addHovered && "shadow-[0_0_5px_red] text-red-500",
+                    loading && "pointer-events-none"
                   )}
-                ></i>
-                <p>
-                  {savedMovies.find((m: any) => m.id === id) ? "Drop" : "Add"}
-                </p>
-              </button>}
+                  onMouseEnter={() => setAddHovered(true)}
+                  onMouseLeave={() => setAddHovered(false)}
+                  onClick={() => getsavedMovies()}
+                  disabled={loading}
+                >
+                  <i
+                    className={clsx(
+                      "bx bxs-folder-minus",
+                      "transition-all duration-300 ease-in-out"
+                    )}
+                  ></i>
+                  <p>
+                    {savedMovies.find((m: any) => m.id === id) ? "Drop" : "Add"}
+                  </p>
+                </button>
+              )}
+
               <button
                 className={clsx(
                   "view",
@@ -427,7 +410,7 @@ export default function View({
             src={
               type === "movie"
                 ? `https://www.vidking.net/embed/${type}/${id}`
-                : `https://www.vidking.net/embed/tv/${id}/1/1?autoPlay=true&nextEpisode=true&episodeSelector=true`
+                : `https://www.vidking.net/embed/${type}/${id}/1/1?autoPlay=true&nextEpisode=true&episodeSelector=true`
             }
             allowFullScreen
           ></iframe>

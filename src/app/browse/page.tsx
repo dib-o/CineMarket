@@ -93,6 +93,10 @@ export default function Browse({
       const combined = results.flatMap((r) => r.results ?? []);
       setMovies(combined);
       console.log(combined);
+      setTimeout(() => {
+        const res = document.getElementById("results");
+        res?.scrollIntoView();
+      }, 500);
     } catch (err) {
       console.error("Error fetching from TMDB:", err);
     }
@@ -116,6 +120,7 @@ export default function Browse({
     setActiveGenre(genreId);
     getMovies(genreId, type);
   };
+ 
   return (
     <div
       className={clsx(
@@ -145,158 +150,163 @@ export default function Browse({
             "gap-10"
           )}
         >
-          <div
-            className={clsx(
-              "flex flex-row justify-center items-center",
-              "w-full h-auto",
-              "text-white",
-              "gap-10"
-            )}
-          >
-            <button
-              className={clsx(
-                "browse",
-                activeType === "movie" && "shadow-[inset_0_0_20px_#fb2c36]"
-              )}
-              onClick={() => {
-                setActiveType("movie");
-                setActiveGenre(0);
-                setMovies([]);
-              }}
-            >
-              <i
+          {view === null && (
+            <>
+              <div
                 className={clsx(
-                  "bx bxs-movie-play",
-                  "flex justify-center items-center",
-                  "w-auto h-auto"
-                )}
-              ></i>
-              <p
-                className={clsx(
-                  "flex justify-center items-center",
-                  "w-auto h-auto"
+                  "flex flex-row flex-wrap justify-center items-center",
+                  "w-full h-auto",
+                  "text-white",
+                  "gap-10"
                 )}
               >
-                Movie
-              </p>
-            </button>
-            <button
-              className={clsx(
-                "browse",
-                activeType === "tv" && "shadow-[inset_0_0_20px_#fb2c36]"
-              )}
-              onClick={() => {
-                setActiveType("tv");
-                setActiveGenre(0);
-                setMovies([]);
-              }}
-            >
-              <i
-                className={clsx(
-                  "bx bxs-tv",
-                  "flex justify-center items-center",
-                  "w-auto h-auto"
-                )}
-              ></i>
-              <p
-                className={clsx(
-                  "flex justify-center items-center",
-                  "w-auto h-auto"
-                )}
-              >
-                Tv
-              </p>
-            </button>
-            <button
-              className={clsx(
-                "browse",
-                activeType === "Anime" && "shadow-[inset_0_0_20px_#fb2c36] "
-              )}
-              onClick={() => {
-                setActiveType("Anime");
-                setActiveGenre(0);
-                setPageNum(1);
-                setMovies([]);
-                getMovies(16, "Anime");
-              }}
-            >
-              <i
-                className={clsx(
-                  "bx bx-mask",
-                  "flex justify-center items-center",
-                  "w-auto h-auto"
-                )}
-              ></i>
-              <p
-                className={clsx(
-                  "flex justify-center items-center",
-                  "w-auto h-auto"
-                )}
-              >
-                Anime
-              </p>
-            </button>
-          </div>
-          <ul
-            className={clsx(
-              "flex flex-row flex-wrap justify-center items-center",
-              "w-full h-auto p-5",
-              "gap-10"
-            )}
-          >
-            {activeType === "movie" &&
-              movieGenres.map((m: any, index) => (
-                <li
-                  key={index}
+                <button
                   className={clsx(
-                    "text-[1rem] text-white text-center",
-                    "w-auto min-w-[10rem] h-auto p-5",
-                    "cursor-pointer",
-                    "uppercase",
-                    "rounded-[1rem]",
-                    "text-shadow-[2px_2px_5px_black]",
-                    "border-b-transparent border-solid border-b-[.2rem]",
-                    "transition-all duration-300 ease-in-out",
-                    "hover:shadow-[0_0_5px_rgba(0,0,0.2)] hover:bg-red-500",
-                    activeGenre === m.id && "bg-red-500"
+                    "browse",
+                    activeType === "movie" && "shadow-[inset_0_0_20px_#fb2c36]"
                   )}
                   onClick={() => {
-                    setActiveGenre(m.id);
-                    setPageNum(1);
-                    getMovies(m.id, "movie");
+                    setActiveType("movie");
+                    setActiveGenre(0);
+                    setMovies([]);
                   }}
                 >
-                  {m.name}
-                </li>
-              ))}
-            {activeType === "tv" &&
-              tvGenres.map((m: any, index) => (
-                <li
-                  key={index}
+                  <i
+                    className={clsx(
+                      "bx bxs-movie-play",
+                      "flex justify-center items-center",
+                      "w-auto h-auto"
+                    )}
+                  ></i>
+                  <p
+                    className={clsx(
+                      "flex justify-center items-center",
+                      "w-auto h-auto"
+                    )}
+                  >
+                    Movie
+                  </p>
+                </button>
+                <button
                   className={clsx(
-                    "text-[1rem] text-white text-center",
-                    "w-auto min-w-[10rem] h-auto p-5",
-                    "cursor-pointer",
-                    "uppercase",
-                    "rounded-[1rem]",
-                    "text-shadow-[2px_2px_5px_black]",
-                    "border-b-transparent border-solid border-b-[.2rem]",
-                    "transition-all duration-300 ease-in-out",
-                    "hover:shadow-[0_0_5px_rgba(0,0,0.2)] hover:bg-red-500",
-                    activeGenre === m.id && "bg-red-500"
+                    "browse",
+                    activeType === "tv" && "shadow-[inset_0_0_20px_#fb2c36]"
                   )}
                   onClick={() => {
-                    setActiveGenre(m.id);
-                    setPageNum(1);
-                    getMovies(m.id, "tv");
+                    setActiveType("tv");
+                    setActiveGenre(0);
+                    setMovies([]);
                   }}
                 >
-                  {m.name}
-                </li>
-              ))}
-          </ul>
+                  <i
+                    className={clsx(
+                      "bx bxs-tv",
+                      "flex justify-center items-center",
+                      "w-auto h-auto"
+                    )}
+                  ></i>
+                  <p
+                    className={clsx(
+                      "flex justify-center items-center",
+                      "w-auto h-auto"
+                    )}
+                  >
+                    Tv
+                  </p>
+                </button>
+                <button
+                  className={clsx(
+                    "browse",
+                    activeType === "Anime" && "shadow-[inset_0_0_20px_#fb2c36] "
+                  )}
+                  onClick={() => {
+                    setActiveType("Anime");
+                    setActiveGenre(0);
+                    setPageNum(1);
+                    setMovies([]);
+                    getMovies(16, "Anime");
+                  }}
+                >
+                  <i
+                    className={clsx(
+                      "bx bx-mask",
+                      "flex justify-center items-center",
+                      "w-auto h-auto"
+                    )}
+                  ></i>
+                  <p
+                    className={clsx(
+                      "flex justify-center items-center",
+                      "w-auto h-auto"
+                    )}
+                  >
+                    Anime
+                  </p>
+                </button>
+              </div>
+              <ul
+                className={clsx(
+                  "flex flex-row flex-wrap justify-center items-center",
+                  "w-full h-auto p-5",
+                  "gap-10"
+                )}
+              >
+                {activeType === "movie" &&
+                  movieGenres.map((m: any, index) => (
+                    <li
+                      key={index}
+                      className={clsx(
+                        "text-[1rem] text-white text-center",
+                        "w-auto min-w-[10rem] h-auto p-5",
+                        "cursor-pointer",
+                        "uppercase",
+                        "rounded-[1rem]",
+                        "text-shadow-[2px_2px_5px_black]",
+                        "border-b-transparent border-solid border-b-[.2rem]",
+                        "transition-all duration-300 ease-in-out",
+                        "hover:shadow-[0_0_5px_rgba(0,0,0.2)] hover:bg-red-500",
+                        activeGenre === m.id && "bg-red-500"
+                      )}
+                      onClick={() => {
+                        setActiveGenre(m.id);
+                        setPageNum(1);
+                        getMovies(m.id, "movie");
+                      }}
+                    >
+                      {m.name}
+                    </li>
+                  ))}
+                {activeType === "tv" &&
+                  tvGenres.map((m: any, index) => (
+                    <li
+                      key={index}
+                      className={clsx(
+                        "text-[1rem] text-white text-center",
+                        "w-auto min-w-[10rem] h-auto p-5",
+                        "cursor-pointer",
+                        "uppercase",
+                        "rounded-[1rem]",
+                        "text-shadow-[2px_2px_5px_black]",
+                        "border-b-transparent border-solid border-b-[.2rem]",
+                        "transition-all duration-300 ease-in-out",
+                        "hover:shadow-[0_0_5px_rgba(0,0,0.2)] hover:bg-red-500",
+                        activeGenre === m.id && "bg-red-500"
+                      )}
+                      onClick={() => {
+                        setActiveGenre(m.id);
+                        setPageNum(1);
+                        getMovies(m.id, "tv");
+                      }}
+                    >
+                      {m.name}
+                    </li>
+                  ))}
+              </ul>
+            </>
+          )}
           {movies.length !== 0 && view === null && (
             <ul
+            id="results"
               className={clsx(
                 "flex flex-row flex-wrap justify-center items-center",
                 "w-full h-auto",
